@@ -1,0 +1,1606 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한국어 관용 표현 번역 및 이해도 실증 실험 (38문장)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+      body {
+        font-family:
+          "Pretendard",
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          Roboto,
+          sans-serif;
+        top: 0px !important;
+      }
+      .notranslate {
+        translate: no;
+      }
+      .missing-card {
+        border: 2px solid #ef4444 !important;
+        background-color: #fef2f2 !important;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-100 min-h-screen text-slate-800 flex flex-col justify-between"
+  >
+    <header class="bg-blue-700 text-white py-4 shadow-md sticky top-0 z-50">
+      <div
+        class="max-w-4xl mx-auto px-4 flex flex-wrap justify-between items-center gap-3"
+      >
+        <div>
+          <h1 id="txt-header-title" class="text-lg font-bold">
+            한국어 관용 표현 번역 및 이해도 실증 실험
+          </h1>
+          <p id="txt-header-sub" class="text-xs text-blue-200 mt-0.5">
+            Korean Idiomatic Expressions Study (38 Sentences)
+          </p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <select
+            id="global-lang-select"
+            onchange="changeLanguage(this.value)"
+            class="notranslate bg-blue-800 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-blue-500 focus:outline-none cursor-pointer max-w-[200px]"
+            translate="no"
+          ></select>
+          <span
+            id="step-indicator"
+            class="bg-blue-900 text-blue-100 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-500 whitespace-nowrap"
+          >
+            1 / 4
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-1">
+      <!-- STEP 1: 참가자 정보 -->
+      <div
+        id="section-user"
+        class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6"
+      >
+        <div class="border-b border-slate-200 pb-4">
+          <h2 id="txt-step1-title" class="text-lg font-bold text-slate-900">
+            1. 참가자 기본 정보 입력
+          </h2>
+          <p id="txt-step1-desc" class="text-xs text-slate-500 mt-1">
+            실험 통계 분석을 위한 기본 정보와 사용하실 언어를 선택해 주세요.
+          </p>
+        </div>
+
+        <div class="space-y-4 text-sm">
+          <div>
+            <label
+              id="lbl-user-id"
+              class="block font-semibold text-slate-700 mb-1"
+              >이름 또는 학번/ID (Name / Student ID)</label
+            >
+            <input
+              type="text"
+              id="user-id"
+              placeholder="Ex: Student01"
+              class="notranslate w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              translate="no"
+            />
+          </div>
+
+          <div>
+            <label
+              id="lbl-user-lang"
+              class="block font-semibold text-slate-700 mb-1"
+              >모국어 선택 (Select Native Language - 41 Languages)</label
+            >
+            <select
+              id="user-lang"
+              onchange="changeLanguage(this.value)"
+              class="notranslate w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium"
+              translate="no"
+            ></select>
+          </div>
+
+          <div>
+            <label
+              id="lbl-user-topik"
+              class="block font-semibold text-slate-700 mb-1"
+              >한국어 능력 수준 (TOPIK Level)</label
+            >
+            <select
+              id="user-topik"
+              class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <option value="TOPIK 1-2" id="opt-topik-1">
+                TOPIK 1~2급 (초급 / Beginner)
+              </option>
+              <option value="TOPIK 3-4" id="opt-topik-2">
+                TOPIK 3~4급 (중급 / Intermediate)
+              </option>
+              <option value="TOPIK 5-6" id="opt-topik-3">
+                TOPIK 5~6급 (고급 / Advanced)
+              </option>
+              <option value="No Level" id="opt-topik-4">
+                공식 등급 없음 (No Official Score)
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          onclick="goToExp1()"
+          id="btn-start-exp"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow text-base"
+        >
+          실험 시작하기 (38개 문장) &rarr;
+        </button>
+
+        <!-- 첫 화면 하단 우측 운영자 전용 드라이브 연결 테스트 버튼 -->
+        <div class="pt-3 border-t border-slate-100 flex justify-end">
+          <button
+            onclick="testDriveConnection()"
+            id="btn-test-conn"
+            class="notranslate text-[11px] text-slate-400 hover:text-slate-600 hover:bg-slate-100 px-2.5 py-1 rounded transition flex items-center gap-1 cursor-pointer"
+            translate="no"
+            title="운영자 전용: 구글 드라이브 폴더 연동 테스트"
+          >
+            <span>⚙️</span> <span>Drive 저장 테스트</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: 1차 실험 -->
+      <div id="section-exp1" class="hidden space-y-6">
+        <div
+          class="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-900 space-y-2 shadow-sm"
+        >
+          <h2 id="txt-exp1-heading" class="font-bold text-base text-amber-950">
+            📝 1차 실험: 기존 방식 번역 (38문장)
+          </h2>
+          <p id="txt-exp1-desc">
+            아래 제시된 한국어 문장을 본인의 모국어로 번역해 주세요. 평소
+            사용하는 번역기(구글/파파고), 사전, AI(ChatGPT 등)를 자유롭게 이용할
+            수 있습니다. 말빛 파인더(malbit-finder)는 사용하면 안 됩니다.
+          </p>
+        </div>
+
+        <div
+          id="exp1-validation-alert"
+          class="hidden bg-red-50 border-2 border-red-400 rounded-xl p-4 text-xs text-red-800 font-bold space-y-1"
+        >
+          <p id="exp1-validation-msg"></p>
+        </div>
+
+        <div id="exp1-container" class="space-y-6"></div>
+
+        <button
+          onclick="goToExp2()"
+          id="btn-to-exp2"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow text-base"
+        >
+          1차 번역 완료 및 2차 실험(말빛 파인더 사용) 진행 &rarr;
+        </button>
+      </div>
+
+      <!-- STEP 3: 2차 실험 -->
+      <div id="section-exp2" class="hidden space-y-6">
+        <!-- 상단 고정 안내 및 말빛 파인더 실행 배너 (문항별 버튼 제거 대신 상단에만 배치) -->
+        <div
+          class="bg-emerald-50 border border-emerald-300 rounded-2xl p-5 text-sm text-emerald-950 space-y-3 shadow-md sticky top-16 z-40"
+        >
+          <div>
+            <h2
+              id="txt-exp2-heading"
+              class="font-bold text-base sm:text-lg text-emerald-900"
+            >
+              ✨ 2차 실험: '말빛 파인더' 사전을 활용한 번역
+            </h2>
+            <p
+              id="txt-exp2-desc"
+              class="mt-0.5 text-xs sm:text-sm text-emerald-800"
+            >
+              동일한 한국어 문장을 '말빛 파인더(malbit-finder)' 사전에 입력하여
+              어휘 및 관용 표현의 의미를 확인한 후, 최종 모국어 번역을 작성해
+              주세요. 이번에는 사전, AI(ChatGPT 등)를 사용하면 안 됩니다.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-3.5 rounded-xl border border-emerald-300 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-inner"
+          >
+            <div class="text-xs text-slate-700">
+              <span
+                id="txt-malbit-banner-title"
+                class="font-bold text-emerald-800 block text-sm mb-0.5"
+                >🔍 말빛 파인더 사전 열기</span
+              >
+              <span id="txt-malbit-banner-sub"
+                >문장을 복사한 후 버튼을 눌러 말빛 파인더 사전에서 검색해
+                보세요.</span
+              >
+            </div>
+            <a
+              href="https://malbit-finder.pages.dev/"
+              target="_blank"
+              id="btn-open-malbit"
+              class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-lg text-xs transition text-center shadow whitespace-nowrap"
+            >
+              말빛 파인더 열기 ↗
+            </a>
+          </div>
+        </div>
+
+        <div
+          id="exp2-validation-alert"
+          class="hidden bg-red-50 border-2 border-red-400 rounded-xl p-4 text-xs text-red-800 font-bold space-y-1"
+        >
+          <p id="exp2-validation-msg"></p>
+        </div>
+
+        <div id="exp2-container" class="space-y-6"></div>
+
+        <button
+          onclick="submitAllData()"
+          id="btn-submit-final"
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl transition shadow text-lg"
+        >
+          최종 실험 결과 제출하기 ✔
+        </button>
+      </div>
+
+      <!-- STEP 4: 완료 화면 -->
+      <div
+        id="section-complete"
+        class="hidden bg-white rounded-2xl p-8 shadow-sm border border-slate-200 text-center space-y-6"
+      >
+        <div
+          id="complete-icon"
+          class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl font-black"
+        >
+          ✓
+        </div>
+        <div>
+          <h2 id="txt-complete-title" class="text-2xl font-bold text-slate-900">
+            실험 결과를 저장 중입니다...
+          </h2>
+          <p id="txt-complete-sub" class="text-sm text-slate-600 mt-2">
+            잠시만 기다려 주세요. 구글 드라이브로 데이터를 전송하고 있습니다.
+          </p>
+        </div>
+
+        <div
+          class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left space-y-4"
+        >
+          <h3
+            id="txt-summary-heading"
+            class="font-bold text-slate-800 text-sm border-b border-slate-200 pb-2"
+          >
+            📋 제출 결과 요약 (Submission Summary)
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div
+              class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm"
+            >
+              <span id="lbl-summary-user" class="text-slate-400 block mb-1"
+                >참가자 ID</span
+              >
+              <span
+                id="sum-user-id"
+                class="font-bold text-slate-800 text-sm notranslate"
+                translate="no"
+                >-</span
+              >
+            </div>
+            <div
+              class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm"
+            >
+              <span id="lbl-summary-lang" class="text-slate-400 block mb-1"
+                >선택 언어</span
+              >
+              <span
+                id="sum-user-lang"
+                class="font-bold text-slate-800 text-sm notranslate"
+                translate="no"
+                >-</span
+              >
+            </div>
+            <div
+              class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm"
+            >
+              <span id="lbl-summary-sentences" class="text-slate-400 block mb-1"
+                >완료한 평가 문항</span
+              >
+              <span
+                id="sum-sentence-count"
+                class="font-bold text-emerald-600 text-sm"
+                >38 / 38</span
+              >
+            </div>
+            <div
+              class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm"
+            >
+              <span id="lbl-summary-status" class="text-slate-400 block mb-1"
+                >구글 드라이브 저장 상태</span
+              >
+              <span id="sum-status" class="font-bold text-amber-600 text-sm"
+                >전송 중... (Sending...)</span
+              >
+            </div>
+          </div>
+
+          <!-- 에러 발생 시 상세 원인 진단창 -->
+          <div
+            id="drive-error-detail"
+            class="hidden bg-red-50 border border-red-300 rounded-xl p-4 text-xs text-red-900 space-y-1"
+          >
+            <p class="font-bold">⚠️ 구글 드라이브 저장 오류 상세 진단:</p>
+            <p
+              id="drive-error-msg"
+              class="font-mono break-all text-red-700"
+            ></p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <button
+            onclick="downloadBackupCSV()"
+            id="btn-download-csv"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-3 rounded-xl transition shadow"
+          >
+            💾 결과 CSV 파일 다운로드 (백업용)
+          </button>
+          <button
+            onclick="location.reload()"
+            id="btn-restart"
+            class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-6 py-3 rounded-xl transition shadow"
+          >
+            새 참가자로 다시 시작하기
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 text-xs py-4 text-center">
+      Malbit Finder Empirical Study Tool | 38 Sentences Evaluation Suite
+    </footer>
+
+    <script>
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbxjSoXspJ3HZvDnMTHwPOgGDqcOG8cc8Pmslzi-BwRahNAcn6TxTBIceF6Ge7qfzKiGUw/exec";
+      const TARGET_FOLDER_ID = "1D-WU2ATJ7bZ9hAbwzLDHEXtSzELWnEQf";
+
+      // 말빛 파인더 지원 41개 언어 목록
+      const LANGUAGES = [
+        { code: "ko", name: "한국어 (Korean)" },
+        { code: "en", name: "English (영어)" },
+        { code: "zh-CN", name: "中文 - 简体 (중국어 간체)" },
+        { code: "zh-TW", name: "中文 - 繁體 (중국어 번체)" },
+        { code: "vi", name: "Tiếng Việt (베트남어)" },
+        { code: "uz", name: "O'zbekcha (우즈베크어)" },
+        { code: "ja", name: "日本語 (일본어)" },
+        { code: "ru", name: "Русский (러시아어)" },
+        { code: "es", name: "Español (스페인어)" },
+        { code: "fr", name: "Français (프랑스어)" },
+        { code: "de", name: "Deutsch (독일어)" },
+        { code: "th", name: "ไทย (태국어)" },
+        { code: "id", name: "Bahasa Indonesia (인도네시아어)" },
+        { code: "mn", name: "Монгол (몽골어)" },
+        { code: "hi", name: "हिन्दी (힌디어)" },
+        { code: "ar", name: "العربية (아랍어)" },
+        { code: "tl", name: "Tagalog (필리핀어)" },
+        { code: "ms", name: "Bahasa Melayu (말레이어)" },
+        { code: "km", name: "ភាសាខ្មែរ (캄보디아어)" },
+        { code: "my", name: "မြန်မာဘာသာ (미얀마어)" },
+        { code: "ne", name: "नेपाली (네팔어)" },
+        { code: "bn", name: "বাংলা (벵골어)" },
+        { code: "si", name: "සිංහල (싱할라어)" },
+        { code: "tr", name: "Türkçe (튀르키예어)" },
+        { code: "pt", name: "Português (포르투갈어)" },
+        { code: "it", name: "Italiano (이탈리아어)" },
+        { code: "nl", name: "Nederlands (네덜란드어)" },
+        { code: "pl", name: "Polski (폴란드어)" },
+        { code: "ro", name: "Română (루마니아어)" },
+        { code: "hu", name: "Magyar (헝가리어)" },
+        { code: "cs", name: "Čeština (체코어)" },
+        { code: "uk", name: "Українська (우크라이나어)" },
+        { code: "kk", name: "Қазақша (카자흐어)" },
+        { code: "ky", name: "Кыргызча (키르기스어)" },
+        { code: "tg", name: "Тоҷикӣ (타지크어)" },
+        { code: "fa", name: "فارسی (페르시아어)" },
+        { code: "ur", name: "اردو (우르두어)" },
+        { code: "sw", name: "Kiswahili (스와힐리어)" },
+        { code: "sv", name: "Svenska (스웨덴어)" },
+        { code: "el", name: "Ελληνικά (그리스어)" },
+        { code: "he", name: "עברית (히브리어)" },
+      ];
+
+      // 드롭다운 선택지까지 모두 포함한 완전한 다국어 사전
+      const I18N_BASE = {
+        ko: {
+          headerTitle: "한국어 관용 표현 번역 및 이해도 실증 실험",
+          headerSub: "Korean Idiomatic Expressions Study (38 Sentences)",
+          step1Title: "1. 참가자 기본 정보 입력",
+          step1Desc:
+            "실험 통계 분석을 위한 기본 정보와 사용하실 언어를 선택해 주세요.",
+          lblUserId: "이름 또는 학번/ID (Name / ID)",
+          lblUserLang: "모국어 선택 (Select Native Language)",
+          lblUserTopik: "한국어 능력 수준 (TOPIK Level)",
+          topik1: "TOPIK 1~2급 (초급)",
+          topik2: "TOPIK 3~4급 (중급)",
+          topik3: "TOPIK 5~6급 (고급)",
+          topik4: "공식 등급 없음",
+          btnStartExp: "실험 시작하기 (38개 문장) →",
+          exp1Heading: "📝 1차 실험: 기존 방식 번역 (38문장)",
+          exp1Desc:
+            "아래 제시된 한국어 문장을 본인의 모국어로 번역해 주세요. 평소 사용하는 번역기(구글/파파고), 사전, AI(ChatGPT 등)를 자유롭게 이용할 수 있습니다. 말빛 파인더(malbit-finder)는 사용하면 안 됩니다.",
+          btnToExp2: "1차 번역 완료 및 2차 실험(말빛 파인더 사용) 진행 →",
+          exp2Heading: "✨ 2차 실험: '말빛 파인더' 사전을 활용한 번역",
+          exp2Desc:
+            "동일한 한국어 문장을 '말빛 파인더' 사전에 입력하여 어휘 및 관용 표현의 의미를 확인한 후, 최종 모국어 번역을 작성해 주세요.",
+          malbitTitle: "🔍 말빛 파인더 사전 열기",
+          malbitSub:
+            "문장을 복사한 후 버튼을 눌러 말빛 파인더 사전에서 검색해 보세요.",
+          btnOpenMalbit: "말빛 파인더 열기 ↗",
+          btnSubmitFinal: "최종 실험 결과 제출하기 ✔",
+          completeTitle: "실험 참여가 완료되었습니다!",
+          completeSub:
+            "제출해주신 38개 문장에 대한 반응 데이터가 구글 드라이브에 안전하게 저장되었습니다.",
+          summaryHeading: "📋 제출 결과 요약",
+          summaryUser: "참가자 ID",
+          summaryLang: "선택 언어",
+          summarySentences: "완료한 평가 문항",
+          summaryStatus: "저장 상태",
+          statusSaved: "구글 드라이브 저장 완료 ✓",
+          btnDownloadCsv: "💾 결과 CSV 파일 다운로드 (백업용)",
+          btnRestart: "새 참가자로 다시 시작하기",
+          lblSentence: "제시 문장 (Korean Sentence):",
+          btnCopy: "📋 문장 복사",
+          lblPrevRecord: "1차 번역 기록:",
+          lblTrans1: "1차 번역 작성 (모국어로 작성):",
+          lblTool: "사용한 번역 도구:",
+          toolGoogle: "구글 번역 (Google Translate)",
+          toolPapago: "네이버 파파고 (Papago)",
+          toolAI: "AI (ChatGPT / Gemini / Claude)",
+          toolDict: "기존 사전 (Naver Dict 등)",
+          toolSelf: "도구 미사용 (스스로 번역)",
+          lblConf1: "번역 확신도 (1~5):",
+          conf5: "5 - 매우 확신함 (Very Confident)",
+          conf4: "4 - 어느 정도 확신함 (Confident)",
+          conf3: "3 - 보통 (Neutral)",
+          conf2: "2 - 불확실함 (Unsure)",
+          conf1: "1 - 전혀 모름/추측 (Guessing)",
+          lblTrans2: "말빛 파인더 검색 후 최종 수정 번역:",
+          lblRecognized:
+            "말빛 파인더를 통해 속담/관용구/복합어를 새롭게 알게 되었습니까?",
+          recogYes: "예! 몰랐던 관용구/속담 의미를 새로 알게 됨",
+          recogKnew: "원래 알고 있던 표현이지만 뜻을 재확인함",
+          recogLiteral: "관용구가 아니라 글자 그대로의 의미임을 확인함",
+          recogHard: "사전을 봐도 여전히 문맥 이해가 어려움",
+          lblConf2: "2차 번역 확신도 (1~5):",
+        },
+        en: {
+          headerTitle: "Korean Idiomatic Expressions Translation Study",
+          headerSub: "Korean Idiomatic Expressions Study (38 Sentences)",
+          step1Title: "1. Participant Information",
+          step1Desc:
+            "Please enter your basic info and select your native language.",
+          lblUserId: "Name or Participant ID",
+          lblUserLang: "Select Native Language",
+          lblUserTopik: "Korean Proficiency Level (TOPIK)",
+          topik1: "TOPIK Level 1~2 (Beginner)",
+          topik2: "TOPIK Level 3~4 (Intermediate)",
+          topik3: "TOPIK Level 5~6 (Advanced)",
+          topik4: "No Official TOPIK Score",
+          btnStartExp: "Start Experiment (38 Sentences) →",
+          exp1Heading:
+            "📝 Phase 1: Translation with Existing Tools (38 Sentences)",
+          exp1Desc:
+            "Please translate the following Korean sentences into your native language. You may freely use Google Translate, Papago, ChatGPT, or dictionaries. Do not use Malbit Finder (malbit-finder).",
+          btnToExp2:
+            "Complete Phase 1 & Proceed to Phase 2 (with Malbit Finder) →",
+          exp2Heading:
+            "✨ Phase 2: Translation Using 'Malbit Finder' Dictionary",
+          exp2Desc:
+            "Enter the same Korean sentence into 'Malbit Finder' to check idioms and vocabulary meanings before writing your final translation.",
+          malbitTitle: "🔍 Open Malbit Finder Dictionary",
+          malbitSub: "Copy each sentence below and search it on Malbit Finder.",
+          btnOpenMalbit: "Open Malbit Finder ↗",
+          btnSubmitFinal: "Submit Final Experiment Results ✔",
+          completeTitle: "Experiment Completed!",
+          completeSub:
+            "Your translation responses for all 38 sentences have been saved to Google Drive.",
+          summaryHeading: "📋 Submission Summary",
+          summaryUser: "Participant ID",
+          summaryLang: "Selected Language",
+          summarySentences: "Completed Sentences",
+          summaryStatus: "Save Status",
+          statusSaved: "Saved to Google Drive ✓",
+          btnDownloadCsv: "💾 Download Backup CSV File",
+          btnRestart: "Start New Participant Session",
+          lblSentence: "Korean Sentence:",
+          btnCopy: "📋 Copy Sentence",
+          lblPrevRecord: "Phase 1 Translation Record:",
+          lblTrans1: "Phase 1 Translation (In your native language):",
+          lblTool: "Translation Tool Used:",
+          toolGoogle: "Google Translate",
+          toolPapago: "Naver Papago",
+          toolAI: "AI (ChatGPT / Gemini / Claude)",
+          toolDict: "Bilingual Dictionary (Naver Dict, etc.)",
+          toolSelf: "None (Translated by myself)",
+          lblConf1: "Confidence Level (1~5):",
+          conf5: "5 - Very Confident",
+          conf4: "4 - Confident",
+          conf3: "3 - Neutral",
+          conf2: "2 - Unsure",
+          conf1: "1 - Guessing / Don't know",
+          lblTrans2: "Final Refined Translation (with Malbit Finder):",
+          lblRecognized:
+            "Did Malbit Finder help you recognize a new idiom/phrase?",
+          recogYes: "Yes! I learned a new idiom/proverb meaning",
+          recogKnew:
+            "I already knew this expression, and confirmed its meaning",
+          recogLiteral: "Confirmed it is used literally (not an idiom)",
+          recogHard:
+            "Still difficult to understand the context even with the dictionary",
+          lblConf2: "Final Confidence Level (1~5):",
+        },
+        "zh-CN": {
+          headerTitle: "韩语惯用语翻译与理解实证实验",
+          headerSub: "Korean Idiomatic Expressions Study (38 Sentences)",
+          step1Title: "1. 参与者基本信息",
+          step1Desc: "请输入您的基本信息并选择您的母语。",
+          lblUserId: "姓名或学号/ID",
+          lblUserLang: "选择母语",
+          lblUserTopik: "韩语能力水平 (TOPIK)",
+          topik1: "TOPIK 1~2级 (初级)",
+          topik2: "TOPIK 3~4级 (中级)",
+          topik3: "TOPIK 5~6级 (高级)",
+          topik4: "无官方等级成绩",
+          btnStartExp: "开始实验 (共38句) →",
+          exp1Heading: "📝 阶段 1：使用常规工具翻译 (38句)",
+          exp1Desc:
+            "请将下列韩语句子翻译为您的母语。您可以自由使用翻译器（谷歌/Papago）、字典或AI（ChatGPT等）。请勿使用말빛 파인더（malbit-finder）。",
+          btnToExp2: "完成阶段 1 并进入阶段 2 (使用 Malbit Finder) →",
+          exp2Heading: "✨ 阶段 2：使用 'Malbit Finder' 字典进行翻译",
+          exp2Desc:
+            "在 'Malbit Finder' 字典中输入相同的韩语句子，确认熟语及惯用表达的含义后填写最终翻译。",
+          malbitTitle: "🔍 打开 Malbit Finder 字典",
+          malbitSub: "复制句子后点击上方按钮，在 Malbit Finder 中进行搜索。",
+          btnOpenMalbit: "打开 Malbit Finder ↗",
+          btnSubmitFinal: "提交最终实验结果 ✔",
+          completeTitle: "实验参与完成！",
+          completeSub: "您提交的 38 个句子的数据已安全保存到 Google Drive。",
+          summaryHeading: "📋 提交结果摘要",
+          summaryUser: "参与者 ID",
+          summaryLang: "选择语言",
+          summarySentences: "完成题数",
+          summaryStatus: "保存状态",
+          statusSaved: "已成功保存至 Google Drive ✓",
+          btnDownloadCsv: "💾 下载备份 CSV 文件",
+          btnRestart: "作为新参与者重新开始",
+          lblSentence: "韩语句子：",
+          btnCopy: "📋 复制句子",
+          lblPrevRecord: "阶段 1 翻译记录：",
+          lblTrans1: "阶段 1 翻译 (用母语填写)：",
+          lblTool: "使用的工具：",
+          toolGoogle: "谷歌翻译 (Google Translate)",
+          toolPapago: "Naver Papago",
+          toolAI: "AI 工具 (ChatGPT / Gemini / Claude)",
+          toolDict: "传统词典 (Naver 词典等)",
+          toolSelf: "未使用工具 (自己独立翻译)",
+          lblConf1: "翻译确信度 (1~5分)：",
+          conf5: "5 - 非常确信",
+          conf4: "4 - 比较确信",
+          conf3: "3 - 一般",
+          conf2: "2 - 不太确定",
+          conf1: "1 - 完全不知道/猜测",
+          lblTrans2: "使用 Malbit Finder 后的最终修改翻译：",
+          lblRecognized: "通过 Malbit Finder 识别出新的惯用语/熟语了吗？",
+          recogYes: "是的！新学到了以前不知道的惯用语/俗语含义",
+          recogKnew: "原本就知道该表达，再次确认了含义",
+          recogLiteral: "确认了这里是字面意思（非惯用语）",
+          recogHard: "即使看了词典，仍然难以理解上下文",
+          lblConf2: "最终确信度 (1~5分)：",
+        },
+        vi: {
+          headerTitle: "Thử nghiệm dịch và hiểu thành ngữ tiếng Hàn",
+          headerSub: "Korean Idiomatic Expressions Study (38 Sentences)",
+          step1Title: "1. Thông tin người tham gia",
+          step1Desc:
+            "Vui lòng nhập thông tin cơ bản và chọn ngôn ngữ mẹ đẻ của bạn.",
+          lblUserId: "Tên hoặc Mã số (ID)",
+          lblUserLang: "Chọn ngôn ngữ mẹ đẻ",
+          lblUserTopik: "Trình độ tiếng Hàn (TOPIK)",
+          topik1: "TOPIK Cấp 1~2 (Sơ cấp)",
+          topik2: "TOPIK Cấp 3~4 (Trung cấp)",
+          topik3: "TOPIK Cấp 5~6 (Cao cấp)",
+          topik4: "Chưa có bằng TOPIK chính thức",
+          btnStartExp: "Bắt đầu thử nghiệm (38 câu) →",
+          exp1Heading:
+            "📝 Giai đoạn 1: Dịch bằng công cụ thông thường (38 câu)",
+          exp1Desc:
+            "Vui lòng dịch các câu tiếng Hàn dưới đây sang tiếng mẹ đẻ của bạn. Bạn có thể tự do sử dụng Google Dịch, Papago, từ điển hoặc AI. Không được sử dụng Malbit Finder (malbit-finder).",
+          btnToExp2:
+            "Hoàn thành Giai đoạn 1 & Chuyển sang Giai đoạn 2 (Dùng Malbit Finder) →",
+          exp2Heading: "✨ Giai đoạn 2: Dịch sử dụng từ điển 'Malbit Finder'",
+          exp2Desc:
+            "Nhập câu tiếng Hàn tương tự vào từ điển 'Malbit Finder' để phát hiện cụm từ/thành ngữ trước khi viết bản dịch cuối cùng.",
+          malbitTitle: "🔍 Mở từ điển Malbit Finder",
+          malbitSub:
+            "Sao chép câu và nhấn nút phía trên để tìm kiếm trên Malbit Finder.",
+          btnOpenMalbit: "Mở Malbit Finder ↗",
+          btnSubmitFinal: "Gửi kết quả thử nghiệm cuối cùng ✔",
+          completeTitle: "Đã hoàn thành thử nghiệm!",
+          completeSub:
+            "Dữ liệu phản hồi cho 38 câu của bạn đã được lưu vào Google Drive.",
+          summaryHeading: "📋 Tóm tắt kết quả",
+          summaryUser: "Mã người tham gia",
+          summaryLang: "Ngôn ngữ đã chọn",
+          summarySentences: "Số câu hoàn thành",
+          summaryStatus: "Trạng thái lưu",
+          statusSaved: "Đã lưu vào Google Drive ✓",
+          btnDownloadCsv: "💾 Tải xuống tệp CSV sao lưu",
+          btnRestart: "Bắt đầu lại với người tham gia mới",
+          lblSentence: "Câu tiếng Hàn:",
+          btnCopy: "📋 Sao chép câu",
+          lblPrevRecord: "Bản dịch Giai đoạn 1:",
+          lblTrans1: "Bản dịch Giai đoạn 1 (Bằng tiếng mẹ đẻ):",
+          lblTool: "Công cụ đã sử dụng:",
+          toolGoogle: "Google Dịch (Google Translate)",
+          toolPapago: "Naver Papago",
+          toolAI: "AI (ChatGPT / Gemini / Claude)",
+          toolDict: "Từ điển thông thường (Naver Dict, v.v.)",
+          toolSelf: "Không dùng công cụ (Tự dịch)",
+          lblConf1: "Mức độ tự tin (1~5):",
+          conf5: "5 - Rất tự tin",
+          conf4: "4 - Khá tự tin",
+          conf3: "3 - Bình thường",
+          conf2: "2 - Không chắc chắn",
+          conf1: "1 - Hoàn toàn đoán mò",
+          lblTrans2: "Bản dịch cuối cùng (Sau khi dùng Malbit Finder):",
+          lblRecognized:
+            "Malbit Finder có giúp bạn nhận ra thành ngữ/cụm từ mới không?",
+          recogYes: "Có! Tôi đã biết thêm nghĩa của thành ngữ/tục ngữ mới",
+          recogKnew: "Tôi đã biết biểu hiện này từ trước và xác nhận lại nghĩa",
+          recogLiteral:
+            "Xác nhận câu này dùng theo nghĩa đen (không phải thành ngữ)",
+          recogHard: "Dù đã tra từ điển nhưng vẫn khó hiểu ngữ cảnh",
+          lblConf2: "Mức độ tự tin cuối cùng (1~5):",
+        },
+        uz: {
+          headerTitle:
+            "Koreys iboralari tarjimasi va tushunilishini tajriba qilish",
+          headerSub: "Korean Idiomatic Expressions Study (38 Sentences)",
+          step1Title: "1. Ishtirokchi haqida ma'lumot",
+          step1Desc:
+            "Tahlil uchun shaxsiy ma'lumotlaringizni va ona tilingizni tanlang.",
+          lblUserId: "Ismingiz yoki ID",
+          lblUserLang: "Ona tilingizni tanlang",
+          lblUserTopik: "Koreys tili darajangiz (TOPIK)",
+          topik1: "TOPIK 1~2 daraja (Boshlang'ich)",
+          topik2: "TOPIK 3~4 daraja (O'rta)",
+          topik3: "TOPIK 5~6 daraja (Yuqori)",
+          topik4: "Rasmiy TOPIK darajasi yo'q",
+          btnStartExp: "Tajribani boshlash (38 ta gap) →",
+          exp1Heading:
+            "📝 1-bosqich: Oddiy tarjimonlar bilan tarjima qilish (38 ta gap)",
+          exp1Desc:
+            "Quyidagi koreyscha gaplarni ona tilingizga tarjima qiling. Google Translate, Papago yoki AI lardan foydalanishingiz mumkin. Malbit Finder (malbit-finder) dan foydalanish mumkin emas.",
+          btnToExp2:
+            "1-bosqichni yakunlash va 2-bosqichga o'tish (Malbit Finder bilan) →",
+          exp2Heading:
+            "✨ 2-bosqich: 'Malbit Finder' lug'atidan foydalanib tarjima qilish",
+          exp2Desc:
+            "Ayni shu koreyscha gapni 'Malbit Finder' lug'atiga kiriting va iboralar ma'nosini aniqlagach yakuniy tarjimani yozing.",
+          malbitTitle: "🔍 Malbit Finder lug'atini ochish",
+          malbitSub:
+            "Gapni nusxalang va yuqoridagi tugmani bosib Malbit Finder da qidiring.",
+          btnOpenMalbit: "Malbit Finder ni ochish ↗",
+          btnSubmitFinal: "Yakuniy natijalarni yuborish ✔",
+          completeTitle: "Tajriba yakunlandi!",
+          completeSub:
+            "38 ta gap bo'yicha javoblaringiz Google Drive-ga muvaffaqiyatli saqlandi.",
+          summaryHeading: "📋 Natijalar xulosasi",
+          summaryUser: "Ishtirokchi ID si",
+          summaryLang: "Tanlangan til",
+          summarySentences: "Bajarilgan savollar",
+          summaryStatus: "Saqlash holati",
+          statusSaved: "Google Drive-ga saqlandi ✓",
+          btnDownloadCsv: "💾 CSV faylni yuklab olish (Zaxira)",
+          btnRestart: "Yangi ishtirokchi sifatida qayta boshlash",
+          lblSentence: "Koreyscha gap:",
+          btnCopy: "📋 Gapni nusxalash",
+          lblPrevRecord: "1-bosqich tarjimasi:",
+          lblTrans1: "1-bosqich tarjimasi (Ona tilingizda):",
+          lblTool: "Foydalanilgan vosita:",
+          toolGoogle: "Google Translate",
+          toolPapago: "Naver Papago",
+          toolAI: "AI (ChatGPT / Gemini / Claude)",
+          toolDict: "Lug'at (Naver Dict va b.)",
+          toolSelf: "Vositasiz (O'zim tarjima qildim)",
+          lblConf1: "Ishonch darajasi (1~5):",
+          conf5: "5 - Juda ishonaman",
+          conf4: "4 - Ishonaman",
+          conf3: "3 - O'rtacha",
+          conf2: "2 - Ishonchim komil emas",
+          conf1: "1 - Taxmin qildim / Bilmayman",
+          lblTrans2: "Yakuniy tuzatilgan tarjima (Malbit Finder bilan):",
+          lblRecognized:
+            "Malbit Finder yangi iborani aniqlashga yordam berdimi?",
+          recogYes: "Ha! Men bilmagan yangi ibora/maqol ma'nosini bilib oldim",
+          recogKnew: "Bu iborani oldindan bilardim, ma'nosini tasdiqladim",
+          recogLiteral:
+            "Ibora emas, o'z (to'g'ri) ma'nosida ekanligini tasdiqladim",
+          recogHard: "Lug'atga qarasam ham kontekstni tushunish qiyin",
+          lblConf2: "Yakuniy ishonch darajasi (1~5):",
+        },
+      };
+
+      const dynamicLangCache = {};
+
+      const EXPERIMENT_SENTENCES = [
+        {
+          id: 1,
+          sentence:
+            "나도 그런 게 있다는 이야기는 들었는데 이용하기가 좀 부담스럽네. 괜히 부장님 눈치도 보이고.",
+          idiomTarget: "눈치가 보이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 2,
+          sentence:
+            "육아휴직을 쓰고 싶어도 동료들 눈치가 보여 신청하지 못하는 직장인이 많다.",
+          idiomTarget: "눈치가 보이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 3,
+          sentence: "다들 야근하는데 혼자 먼저 퇴근하려니 눈치 보여요.",
+          idiomTarget: "눈치가 보이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 4,
+          sentence: "제가 물을 주고 키워서 나무와 정이 많이 들었습니다.",
+          idiomTarget: "정이 들다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 5,
+          sentence:
+            "30년 동안 지킨 가게를 떠나며 그는 정든 단골손님들에게 일일이 인사를 했다.",
+          idiomTarget: "정이 들다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 6,
+          sentence:
+            "한 달만 맡아 주기로 한 강아지인데 그새 정이 들어 버렸어요.",
+          idiomTarget: "정이 들다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 7,
+          sentence: "지지부진한 태풍 피해 복구, 속 터지는 인주 주민들",
+          idiomTarget: "속이 터지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 8,
+          sentence:
+            "택배가 일주일째 도착하지 않아 소비자들의 속이 터지고 있다.",
+          idiomTarget: "속이 터지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 9,
+          sentence: "몇 번을 설명해도 못 알아들으니까 정말 속 터져.",
+          idiomTarget: "속이 터지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 10,
+          sentence:
+            "민욱이 주말에 친구 부부를 초대해도 되느냐고 물었을 때, 미연은 말없이 한참 뜸을 들였다.",
+          idiomTarget: "뜸을 들이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 11,
+          sentence: "감독은 기자들의 질문에 한참 뜸을 들인 뒤에야 입을 열었다.",
+          idiomTarget: "뜸을 들이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 12,
+          sentence: "뜸 들이지 말고 빨리 결과 좀 말해 줘.",
+          idiomTarget: "뜸을 들이다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 13,
+          sentence:
+            "그는 경찰 조사에서 사건 당일 현장에 간 적이 없다며 시치미를 뗐다.",
+          idiomTarget: "시치미를 떼다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 14,
+          sentence: "아이는 꽃병을 깨 놓고도 시치미를 뚝 떼고 앉아 있었다.",
+          idiomTarget: "시치미를 떼다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 15,
+          sentence: "내 과자 먹은 거 다 아는데 왜 시치미 떼?",
+          idiomTarget: "시치미를 떼다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 16,
+          sentence:
+            "주변에서 천재라고 비행기를 태우는 바람에 그는 연습을 게을리했다.",
+          idiomTarget: "비행기를 태우다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 17,
+          sentence:
+            "선배가 내 발표가 최고였다고 비행기를 태워 주어서 기분이 좋았다.",
+          idiomTarget: "비행기를 태우다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 18,
+          sentence: "에이, 비행기 태우지 마세요. 저 아직 많이 부족해요.",
+          idiomTarget: "비행기를 태우다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 19,
+          sentence:
+            "특히 성장 호르몬은 여러 가지 음식물을 골고루 먹어야 부족하지 않을 수 있는데 입이 짧은 아이는 균형 있는 영양 섭취에 문제가 있을 수 있다.",
+          idiomTarget: "입이 짧다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 20,
+          sentence:
+            "입이 짧은 아이에게 억지로 밥을 먹이기보다 식사 시간을 즐겁게 만드는 것이 중요하다.",
+          idiomTarget: "입이 짧다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 21,
+          sentence: "우리 딸은 입이 짧아서 반찬 투정이 심해요.",
+          idiomTarget: "입이 짧다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 22,
+          sentence:
+            "손이 큰 사장님 덕분에 이 식당은 반찬을 늘 푸짐하게 내준다.",
+          idiomTarget: "손이 크다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 23,
+          sentence: "그는 손이 커서 후배들에게 밥값을 아끼지 않는다.",
+          idiomTarget: "손이 크다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 24,
+          sentence: "우리 엄마는 손이 커서 명절마다 음식이 남아요.",
+          idiomTarget: "손이 크다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 25,
+          sentence:
+            "우승 후보로 꼽히던 팀이 첫 경기에서 크게 지면서 코가 납작해졌다.",
+          idiomTarget: "코가 납작해지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 26,
+          sentence: "늘 잘난 척하던 형이 동생에게 바둑을 지고 코가 납작해졌다.",
+          idiomTarget: "코가 납작해지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 27,
+          sentence: "이번 시합에서 저 사람 코를 납작하게 만들어 주자.",
+          idiomTarget: "코가 납작해지다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 28,
+          sentence:
+            "그는 공무원 시험에서 세 번이나 미역국을 먹은 끝에 마침내 합격했다.",
+          idiomTarget: "미역국을 먹다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 29,
+          sentence: "운전면허 필기시험에서 또 미역국을 먹을까 봐 걱정이다.",
+          idiomTarget: "미역국을 먹다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 30,
+          sentence: "이번 면접에서도 미역국 먹었어. 너무 속상해.",
+          idiomTarget: "미역국을 먹다",
+          category: "A: 한국어 고유 관용구",
+        },
+        {
+          id: 31,
+          sentence: "교사의 수업 태도는 눈에 띄게 달라졌습니다.",
+          idiomTarget: "눈에 띄다",
+          category: "B: 공통 비유 관용구",
+        },
+        {
+          id: 32,
+          sentence:
+            "새로 문을 연 역사 전시실은 조선 시대 역사관과 기록 절차, 보관 방법, 대표적인 역사 자료들을 전시하고 있습니다.",
+          idiomTarget: "문을 열다",
+          category: "B: 공통 비유 관용구",
+        },
+        {
+          id: 33,
+          sentence: "가게에는 딱히 마음에 드는 게 없어서 책자를 좀 봐야겠네요.",
+          idiomTarget: "마음에 들다",
+          category: "B: 공통 비유 관용구",
+        },
+        {
+          id: 34,
+          sentence:
+            "상업적 공간으로 채워진 거리를 보며 눈살을 찌푸리는 이들도 많다.",
+          idiomTarget: "눈살을 찌푸리다",
+          category: "B: 공통 비유 관용구",
+        },
+        {
+          id: 35,
+          sentence: "할머니께서는 내 말에 자주 귀를 기울이셨다.",
+          idiomTarget: "귀를 기울이다",
+          category: "B: 공통 비유 관용구",
+        },
+        {
+          id: 36,
+          sentence: "생일날 미역국을 먹을 때면 어머니 생각이 난다.",
+          idiomTarget: "글자 그대로 (생일 미역국)",
+          category: "C: 글자 그대로/오탐 대조군",
+        },
+        {
+          id: 37,
+          sentence: "그 농구 선수는 손이 커서 공을 한 손으로 쉽게 잡는다.",
+          idiomTarget: "글자 그대로 (큰 손)",
+          category: "C: 글자 그대로/오탐 대조군",
+        },
+        {
+          id: 38,
+          sentence: "초등학생 아이를 혼자 비행기를 태워 보내도 괜찮을까요?",
+          idiomTarget: "글자 그대로 (비행기 타기)",
+          category: "C: 글자 그대로/오탐 대조군",
+        },
+      ];
+
+      let currentLangCode = "en";
+      let currentLangName = "English (영어)";
+      let userData = {};
+      let exp1Results = [];
+      let lastGeneratedFileName = "";
+      let lastGeneratedCsvContent = "";
+
+      window.onload = () => {
+        populateLanguageSelects();
+        renderExp1();
+        changeLanguage("en");
+      };
+
+      function getActiveDict() {
+        return (
+          I18N_BASE[currentLangCode] ||
+          dynamicLangCache[currentLangCode] ||
+          I18N_BASE["en"]
+        );
+      }
+
+      function populateLanguageSelects() {
+        const globalSel = document.getElementById("global-lang-select");
+        const userSel = document.getElementById("user-lang");
+        globalSel.innerHTML = "";
+        userSel.innerHTML = "";
+
+        LANGUAGES.forEach((lang) => {
+          const opt1 = document.createElement("option");
+          opt1.value = lang.code;
+          opt1.textContent = lang.name;
+          globalSel.appendChild(opt1);
+
+          const opt2 = document.createElement("option");
+          opt2.value = lang.code;
+          opt2.textContent = lang.name;
+          userSel.appendChild(opt2);
+        });
+      }
+
+      // 운영자용 구글 드라이브 저장 테스트
+      async function testDriveConnection() {
+        const btn = document.getElementById("btn-test-conn");
+        const origHtml = btn.innerHTML;
+        btn.innerText = "⏳ 테스트 중...";
+        btn.disabled = true;
+
+        const testPayload = {
+          folderId: TARGET_FOLDER_ID,
+          fileName: "연결테스트_성공확인용_" + new Date().getTime() + ".csv",
+          csvContent:
+            "\uFEFF테스트상태,메시지,시간\n성공,말빛 파인더 실험도구 구글 드라이브 연동 완료," +
+            new Date().toLocaleString(),
+        };
+
+        try {
+          const res = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(testPayload),
+          });
+          const text = await res.text();
+          let json = {};
+          try {
+            json = JSON.parse(text);
+          } catch (e) {}
+
+          if (json.result === "success") {
+            alert(
+              "✅ [연결 성공!] 구글 드라이브 지정 폴더에 '" +
+                testPayload.fileName +
+                "' 파일이 정상 생성되었습니다.",
+            );
+          } else {
+            alert(
+              "⚠️ [구글 앱스크립트 응답 오류]\n" +
+                (json.message || json.error || text),
+            );
+          }
+        } catch (err) {
+          alert("❌ [통신 오류]\n구글 앱스크립트 연결 실패: " + err.message);
+        } finally {
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }
+      }
+
+      // 41개 언어 실시간 번역 적용 함수
+      async function changeLanguage(langCode) {
+        currentLangCode = langCode;
+        const found = LANGUAGES.find((l) => l.code === langCode);
+        currentLangName = found ? found.name : langCode;
+
+        document.getElementById("global-lang-select").value = langCode;
+        document.getElementById("user-lang").value = langCode;
+
+        let dict = I18N_BASE[langCode];
+        if (!dict) {
+          if (dynamicLangCache[langCode]) {
+            dict = dynamicLangCache[langCode];
+          } else {
+            dict = await fetchDynamicTranslation(langCode);
+          }
+        }
+        applyDictionaryToUI(dict);
+      }
+
+      async function fetchDynamicTranslation(targetLang) {
+        const sourceDict = I18N_BASE["en"];
+        const keys = Object.keys(sourceDict);
+        const joinedText = keys.map((k) => sourceDict[k]).join(" ||| ");
+
+        try {
+          const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${encodeURIComponent(targetLang)}&dt=t&q=${encodeURIComponent(joinedText)}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          const translatedFull = data[0].map((item) => item[0]).join("");
+          const splitArr = translatedFull.split(/\s*\|\|\|\s*/);
+
+          const newDict = {};
+          keys.forEach((k, idx) => {
+            newDict[k] = splitArr[idx] || sourceDict[k];
+          });
+          dynamicLangCache[targetLang] = newDict;
+          return newDict;
+        } catch (e) {
+          return I18N_BASE["en"];
+        }
+      }
+
+      function applyDictionaryToUI(t) {
+        if (!t) return;
+        document.getElementById("txt-header-title").innerText = t.headerTitle;
+        document.getElementById("txt-header-sub").innerText = t.headerSub;
+        document.getElementById("txt-step1-title").innerText = t.step1Title;
+        document.getElementById("txt-step1-desc").innerText = t.step1Desc;
+        document.getElementById("lbl-user-id").innerText = t.lblUserId;
+        document.getElementById("lbl-user-lang").innerText = t.lblUserLang;
+        document.getElementById("lbl-user-topik").innerText = t.lblUserTopik;
+
+        document.getElementById("opt-topik-1").innerText = t.topik1;
+        document.getElementById("opt-topik-2").innerText = t.topik2;
+        document.getElementById("opt-topik-3").innerText = t.topik3;
+        document.getElementById("opt-topik-4").innerText = t.topik4;
+
+        document.getElementById("btn-start-exp").innerText = t.btnStartExp;
+
+        document.getElementById("txt-exp1-heading").innerText = t.exp1Heading;
+        document.getElementById("txt-exp1-desc").innerText = t.exp1Desc;
+        document.getElementById("btn-to-exp2").innerText = t.btnToExp2;
+
+        document.getElementById("txt-exp2-heading").innerText = t.exp2Heading;
+        document.getElementById("txt-exp2-desc").innerText = t.exp2Desc;
+        document.getElementById("txt-malbit-banner-title").innerText =
+          t.malbitTitle;
+        document.getElementById("txt-malbit-banner-sub").innerText =
+          t.malbitSub;
+        document.getElementById("btn-open-malbit").innerText = t.btnOpenMalbit;
+        document.getElementById("btn-submit-final").innerText =
+          t.btnSubmitFinal;
+
+        document.getElementById("txt-summary-heading").innerText =
+          t.summaryHeading;
+        document.getElementById("lbl-summary-user").innerText = t.summaryUser;
+        document.getElementById("lbl-summary-lang").innerText = t.summaryLang;
+        document.getElementById("lbl-summary-sentences").innerText =
+          t.summarySentences;
+        document.getElementById("lbl-summary-status").innerText =
+          t.summaryStatus;
+        document.getElementById("btn-download-csv").innerText =
+          t.btnDownloadCsv;
+        document.getElementById("btn-restart").innerText = t.btnRestart;
+
+        // 문항 카드 내부 라벨 및 선택지 일괄 번역 업데이트
+        document
+          .querySelectorAll(".lbl-dyn-sentence")
+          .forEach((el) => (el.innerText = t.lblSentence));
+        document
+          .querySelectorAll(".btn-dyn-copy")
+          .forEach((el) => (el.innerText = t.btnCopy));
+        document
+          .querySelectorAll(".lbl-dyn-prev-record")
+          .forEach((el) => (el.innerText = t.lblPrevRecord));
+        document
+          .querySelectorAll(".lbl-dyn-trans1")
+          .forEach((el) => (el.innerText = t.lblTrans1));
+        document
+          .querySelectorAll(".lbl-dyn-tool")
+          .forEach((el) => (el.innerText = t.lblTool));
+        document
+          .querySelectorAll(".lbl-dyn-conf1")
+          .forEach((el) => (el.innerText = t.lblConf1));
+        document
+          .querySelectorAll(".lbl-dyn-trans2")
+          .forEach((el) => (el.innerText = t.lblTrans2));
+        document
+          .querySelectorAll(".lbl-dyn-recog")
+          .forEach((el) => (el.innerText = t.lblRecognized));
+        document
+          .querySelectorAll(".lbl-dyn-conf2")
+          .forEach((el) => (el.innerText = t.lblConf2));
+
+        // 드롭다운 내부 옵션 번역 적용
+        document
+          .querySelectorAll(".opt-tool-google")
+          .forEach((el) => (el.innerText = t.toolGoogle));
+        document
+          .querySelectorAll(".opt-tool-papago")
+          .forEach((el) => (el.innerText = t.toolPapago));
+        document
+          .querySelectorAll(".opt-tool-ai")
+          .forEach((el) => (el.innerText = t.toolAI));
+        document
+          .querySelectorAll(".opt-tool-dict")
+          .forEach((el) => (el.innerText = t.toolDict));
+        document
+          .querySelectorAll(".opt-tool-self")
+          .forEach((el) => (el.innerText = t.toolSelf));
+
+        document
+          .querySelectorAll(".opt-conf-5")
+          .forEach((el) => (el.innerText = t.conf5));
+        document
+          .querySelectorAll(".opt-conf-4")
+          .forEach((el) => (el.innerText = t.conf4));
+        document
+          .querySelectorAll(".opt-conf-3")
+          .forEach((el) => (el.innerText = t.conf3));
+        document
+          .querySelectorAll(".opt-conf-2")
+          .forEach((el) => (el.innerText = t.conf2));
+        document
+          .querySelectorAll(".opt-conf-1")
+          .forEach((el) => (el.innerText = t.conf1));
+
+        document
+          .querySelectorAll(".opt-recog-yes")
+          .forEach((el) => (el.innerText = t.recogYes));
+        document
+          .querySelectorAll(".opt-recog-knew")
+          .forEach((el) => (el.innerText = t.recogKnew));
+        document
+          .querySelectorAll(".opt-recog-literal")
+          .forEach((el) => (el.innerText = t.recogLiteral));
+        document
+          .querySelectorAll(".opt-recog-hard")
+          .forEach((el) => (el.innerText = t.recogHard));
+      }
+
+      function renderExp1() {
+        const t = getActiveDict();
+        const container = document.getElementById("exp1-container");
+        container.innerHTML = "";
+
+        EXPERIMENT_SENTENCES.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.id = `exp1-card-${item.id}`;
+          card.className =
+            "bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 transition";
+          card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 bg-blue-100 text-blue-800 rounded-md notranslate" translate="no">Q ${index + 1} / 38</span>
+                        <button type="button" onclick="copySentence('${item.sentence.replace(/'/g, "\\'")}')" class="btn-dyn-copy text-xs text-slate-500 hover:text-blue-600 font-semibold border border-slate-200 rounded-lg px-2.5 py-1 transition">
+                            ${t.btnCopy}
+                        </button>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="lbl-dyn-sentence text-xs text-slate-400 block mb-1">${t.lblSentence}</span>
+                        <p class="text-base font-bold text-slate-900 select-all notranslate" translate="no">${item.sentence}</p>
+                    </div>
+                    <div>
+                        <label class="lbl-dyn-trans1 block text-xs font-bold text-slate-700 mb-1">${t.lblTrans1}</label>
+                        <textarea id="exp1-trans-${item.id}" oninput="clearMissingHighlight('exp1-card-${item.id}')" rows="2" class="notranslate w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" translate="no"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div>
+                            <label class="lbl-dyn-tool block text-xs font-bold text-slate-700 mb-1">${t.lblTool}</label>
+                            <select id="exp1-tool-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500">
+                                <option value="Google Translate" class="opt-tool-google">${t.toolGoogle}</option>
+                                <option value="Papago" class="opt-tool-papago">${t.toolPapago}</option>
+                                <option value="ChatGPT / Gemini" class="opt-tool-ai">${t.toolAI}</option>
+                                <option value="Bilingual Dictionary" class="opt-tool-dict">${t.toolDict}</option>
+                                <option value="None (Self)" class="opt-tool-self">${t.toolSelf}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="lbl-dyn-conf1 block text-xs font-bold text-slate-700 mb-1">${t.lblConf1}</label>
+                            <select id="exp1-conf-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500">
+                                <option value="5" class="opt-conf-5">${t.conf5}</option>
+                                <option value="4" class="opt-conf-4">${t.conf4}</option>
+                                <option value="3" selected class="opt-conf-3">${t.conf3}</option>
+                                <option value="2" class="opt-conf-2">${t.conf2}</option>
+                                <option value="1" class="opt-conf-1">${t.conf1}</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+          container.appendChild(card);
+        });
+      }
+
+      function renderExp2() {
+        const t = getActiveDict();
+        const container = document.getElementById("exp2-container");
+        container.innerHTML = "";
+
+        EXPERIMENT_SENTENCES.forEach((item, index) => {
+          const prev = exp1Results.find((r) => r.qId === item.id);
+          const card = document.createElement("div");
+          card.id = `exp2-card-${item.id}`;
+          card.className =
+            "bg-white rounded-2xl p-6 shadow-sm border border-emerald-200 space-y-4 transition";
+          card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md notranslate" translate="no">Q ${index + 1} / 38</span>
+                        <button type="button" onclick="copySentence('${item.sentence.replace(/'/g, "\\'")}')" class="btn-dyn-copy text-xs text-emerald-700 hover:bg-emerald-50 font-semibold border border-emerald-300 rounded-lg px-2.5 py-1 transition">
+                            ${t.btnCopy}
+                        </button>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="lbl-dyn-sentence text-xs text-slate-400 block mb-1">${t.lblSentence}</span>
+                        <p class="text-base font-bold text-slate-900 select-all notranslate" translate="no">${item.sentence}</p>
+                    </div>
+                    <div class="text-xs bg-amber-50 p-3 rounded-lg border border-amber-200 text-amber-900">
+                        <span class="lbl-dyn-prev-record font-bold">${t.lblPrevRecord}</span> 
+                        <span class="notranslate font-medium ml-1" translate="no">${prev ? prev.translation : "-"}</span>
+                    </div>
+                    <div>
+                        <label class="lbl-dyn-trans2 block text-xs font-bold text-emerald-900 mb-1">${t.lblTrans2}</label>
+                        <textarea id="exp2-trans-${item.id}" oninput="clearMissingHighlight('exp2-card-${item.id}')" rows="2" class="notranslate w-full border border-emerald-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" translate="no">${prev ? prev.translation : ""}</textarea>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div>
+                            <label class="lbl-dyn-recog block text-xs font-bold text-slate-700 mb-1">${t.lblRecognized}</label>
+                            <select id="exp2-recog-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500">
+                                <option value="Yes_New_Idiom" class="opt-recog-yes">${t.recogYes}</option>
+                                <option value="Already_Knew" class="opt-recog-knew">${t.recogKnew}</option>
+                                <option value="Literal_Confirmed" class="opt-recog-literal">${t.recogLiteral}</option>
+                                <option value="Still_Confused" class="opt-recog-hard">${t.recogHard}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="lbl-dyn-conf2 block text-xs font-bold text-slate-700 mb-1">${t.lblConf2}</label>
+                            <select id="exp2-conf-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500">
+                                <option value="5" selected class="opt-conf-5">${t.conf5}</option>
+                                <option value="4" class="opt-conf-4">${t.conf4}</option>
+                                <option value="3" class="opt-conf-3">${t.conf3}</option>
+                                <option value="2" class="opt-conf-2">${t.conf2}</option>
+                                <option value="1" class="opt-conf-1">${t.conf1}</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+          container.appendChild(card);
+        });
+      }
+
+      function clearMissingHighlight(cardId) {
+        const card = document.getElementById(cardId);
+        if (card) card.classList.remove("missing-card");
+      }
+
+      function copySentence(text) {
+        navigator.clipboard.writeText(text);
+      }
+
+      function goToExp1() {
+        const idVal = document.getElementById("user-id").value.trim();
+        if (!idVal) {
+          alert(
+            "Please enter your Name or ID. (참가자 이름 또는 ID를 입력해 주세요.)",
+          );
+          document.getElementById("user-id").focus();
+          return;
+        }
+        userData = {
+          id: idVal,
+          langCode: currentLangCode,
+          langName: currentLangName,
+          topik: document.getElementById("user-topik").value,
+          startTime: new Date().toISOString(),
+        };
+
+        document.getElementById("section-user").classList.add("hidden");
+        document.getElementById("section-exp1").classList.remove("hidden");
+        document.getElementById("step-indicator").innerText = "2 / 4";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function goToExp2() {
+        const missingIds = [];
+        EXPERIMENT_SENTENCES.forEach((item) => {
+          const val = document
+            .getElementById(`exp1-trans-${item.id}`)
+            .value.trim();
+          const card = document.getElementById(`exp1-card-${item.id}`);
+          if (!val) {
+            missingIds.push(item.id);
+            card.classList.add("missing-card");
+          } else {
+            card.classList.remove("missing-card");
+          }
+        });
+
+        if (missingIds.length > 0) {
+          const qList = missingIds.map((id) => `Q${id}`).join(", ");
+          const alertMsg = `⚠️ Missing translations (${missingIds.length}): ${qList}\n(번역이 누락된 문항이 있습니다: ${qList})`;
+          const alertBox = document.getElementById("exp1-validation-alert");
+          document.getElementById("exp1-validation-msg").innerText = alertMsg;
+          alertBox.classList.remove("hidden");
+          alert(alertMsg);
+          document
+            .getElementById(`exp1-card-${missingIds[0]}`)
+            .scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        document
+          .getElementById("exp1-validation-alert")
+          .classList.add("hidden");
+        exp1Results = [];
+        EXPERIMENT_SENTENCES.forEach((item) => {
+          exp1Results.push({
+            qId: item.id,
+            sentence: item.sentence,
+            idiomTarget: item.idiomTarget,
+            category: item.category,
+            translation: document
+              .getElementById(`exp1-trans-${item.id}`)
+              .value.trim(),
+            usedTool: document.getElementById(`exp1-tool-${item.id}`).value,
+            confidence: parseInt(
+              document.getElementById(`exp1-conf-${item.id}`).value,
+            ),
+          });
+        });
+
+        renderExp2();
+        document.getElementById("section-exp1").classList.add("hidden");
+        document.getElementById("section-exp2").classList.remove("hidden");
+        document.getElementById("step-indicator").innerText = "3 / 4";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function escapeCsvCell(val) {
+        if (val === null || val === undefined) return '""';
+        const str = String(val).replace(/"/g, '""');
+        return `"${str}"`;
+      }
+
+      async function submitAllData() {
+        const missingIds = [];
+        EXPERIMENT_SENTENCES.forEach((item) => {
+          const val = document
+            .getElementById(`exp2-trans-${item.id}`)
+            .value.trim();
+          const card = document.getElementById(`exp2-card-${item.id}`);
+          if (!val) {
+            missingIds.push(item.id);
+            card.classList.add("missing-card");
+          } else {
+            card.classList.remove("missing-card");
+          }
+        });
+
+        if (missingIds.length > 0) {
+          const qList = missingIds.map((id) => `Q${id}`).join(", ");
+          const alertMsg = `⚠️ Missing translations (${missingIds.length}): ${qList}\n(번역이 누락된 문항이 있습니다: ${qList})`;
+          const alertBox = document.getElementById("exp2-validation-alert");
+          document.getElementById("exp2-validation-msg").innerText = alertMsg;
+          alertBox.classList.remove("hidden");
+          alert(alertMsg);
+          document
+            .getElementById(`exp2-card-${missingIds[0]}`)
+            .scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        document
+          .getElementById("exp2-validation-alert")
+          .classList.add("hidden");
+
+        const btn = document.getElementById("btn-submit-final");
+        btn.disabled = true;
+        btn.innerText = "⏳ Saving to Google Drive...";
+
+        const submitTime = new Date().toISOString();
+        const headers = [
+          "참가자ID",
+          "선택언어",
+          "TOPIK수준",
+          "제출시각",
+          "문항번호",
+          "문장분류",
+          "목표관용어",
+          "제시문장",
+          "1차번역(기존도구)",
+          "1차사용도구",
+          "1차확신도",
+          "2차번역(말빛파인더)",
+          "관용어인식여부",
+          "2차확신도",
+          "번역수정여부",
+        ];
+
+        const rows = [headers.map(escapeCsvCell).join(",")];
+
+        EXPERIMENT_SENTENCES.forEach((item) => {
+          const r1 = exp1Results.find((x) => x.qId === item.id) || {};
+          const trans2 = document
+            .getElementById(`exp2-trans-${item.id}`)
+            .value.trim();
+          const recog2 = document.getElementById(`exp2-recog-${item.id}`).value;
+          const conf2 = document.getElementById(`exp2-conf-${item.id}`).value;
+          const isModified =
+            r1.translation !== trans2 ? "Y (수정됨)" : "N (동일)";
+
+          const row = [
+            userData.id,
+            userData.langName,
+            userData.topik,
+            submitTime,
+            item.id,
+            item.category,
+            item.idiomTarget,
+            item.sentence,
+            r1.translation || "",
+            r1.usedTool || "",
+            r1.confidence || "",
+            trans2,
+            recog2,
+            conf2,
+            isModified,
+          ];
+          rows.push(row.map(escapeCsvCell).join(","));
+        });
+
+        lastGeneratedCsvContent = "\uFEFF" + rows.join("\r\n");
+        const safeId = userData.id.replace(/[^a-zA-Z0-9가-힣_-]/g, "_");
+        const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+        lastGeneratedFileName = `말빛파인더_실험결과_${safeId}_${dateStr}.csv`;
+
+        const payload = {
+          folderId: TARGET_FOLDER_ID,
+          fileName: lastGeneratedFileName,
+          course: "말빛파인더_실험3",
+          studentId: safeId,
+          csvContent: lastGeneratedCsvContent,
+        };
+
+        // 완료 화면 전환
+        document.getElementById("sum-user-id").innerText = userData.id;
+        document.getElementById("sum-user-lang").innerText = userData.langName;
+        document.getElementById("section-exp2").classList.add("hidden");
+        document.getElementById("section-complete").classList.remove("hidden");
+        document.getElementById("step-indicator").innerText = "4 / 4";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        try {
+          const res = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
+          });
+          const text = await res.text();
+          let json = {};
+          try {
+            json = JSON.parse(text);
+          } catch (e) {}
+
+          if (json.result === "success") {
+            const t = getActiveDict();
+            document.getElementById("txt-complete-title").innerText =
+              t.completeTitle;
+            document.getElementById("txt-complete-sub").innerText =
+              t.completeSub;
+            const st = document.getElementById("sum-status");
+            st.innerText = t.statusSaved || "Saved to Drive ✓";
+            st.className = "font-bold text-emerald-600 text-sm";
+          } else {
+            throw new Error(
+              json.message || json.error || text || "Unknown Apps Script Error",
+            );
+          }
+        } catch (err) {
+          document.getElementById("txt-complete-title").innerText =
+            "⚠️ Google Drive Save Check Needed";
+          document.getElementById("txt-complete-sub").innerText =
+            "Please click the blue button below to download the backup CSV file.";
+          const st = document.getElementById("sum-status");
+          st.innerText = "Save Error (Use Backup Button)";
+          st.className = "font-bold text-red-600 text-sm";
+
+          const errBox = document.getElementById("drive-error-detail");
+          document.getElementById("drive-error-msg").innerText = err.message;
+          errBox.classList.remove("hidden");
+        }
+      }
+
+      function downloadBackupCSV() {
+        if (!lastGeneratedCsvContent) return;
+        const blob = new Blob([lastGeneratedCsvContent], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = lastGeneratedFileName || "malbit_experiment_result.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    </script>
+  </body>
+</html>
