@@ -186,7 +186,7 @@
 
       <!-- STEP 3: 2차 실험 -->
       <div id="section-exp2" class="hidden space-y-6">
-        <!-- 상단 고정 안내 및 말빛 파인더 실행 배너 (문항별 버튼 제거 대신 상단에만 배치) -->
+        <!-- 상단 고정 안내 및 말빛 파인더 실행 배너 -->
         <div
           class="bg-emerald-50 border border-emerald-300 rounded-2xl p-5 text-sm text-emerald-950 space-y-3 shadow-md sticky top-16 z-40"
         >
@@ -417,7 +417,7 @@
         { code: "he", name: "עברית (히브리어)" },
       ];
 
-      // 드롭다운 선택지까지 모두 포함한 완전한 다국어 사전
+      // 드롭다운 및 라디오 선택지 다국어 사전
       const I18N_BASE = {
         ko: {
           headerTitle: "한국어 관용 표현 번역 및 이해도 실증 실험",
@@ -466,12 +466,6 @@
           toolAI: "AI (ChatGPT / Gemini / Claude)",
           toolDict: "기존 사전 (Naver Dict 등)",
           toolSelf: "도구 미사용 (스스로 번역)",
-          lblConf1: "번역 확신도 (1~5):",
-          conf5: "5 - 매우 확신함 (Very Confident)",
-          conf4: "4 - 어느 정도 확신함 (Confident)",
-          conf3: "3 - 보통 (Neutral)",
-          conf2: "2 - 불확실함 (Unsure)",
-          conf1: "1 - 전혀 모름/추측 (Guessing)",
           lblTrans2: "말빛 파인더 검색 후 최종 수정 번역:",
           lblRecognized:
             "말빛 파인더를 통해 속담/관용구/복합어를 새롭게 알게 되었습니까?",
@@ -480,6 +474,11 @@
           recogLiteral: "관용구가 아니라 글자 그대로의 의미임을 확인함",
           recogHard: "사전을 봐도 여전히 문맥 이해가 어려움",
           lblConf2: "2차 번역 확신도 (1~5):",
+          conf5: "5 - 매우 확신함 (Very Confident)",
+          conf4: "4 - 어느 정도 확신함 (Confident)",
+          conf3: "3 - 보통 (Neutral)",
+          conf2: "2 - 불확실함 (Unsure)",
+          conf1: "1 - 전혀 모름/추측 (Guessing)",
         },
         en: {
           headerTitle: "Korean Idiomatic Expressions Translation Study",
@@ -530,12 +529,6 @@
           toolAI: "AI (ChatGPT / Gemini / Claude)",
           toolDict: "Bilingual Dictionary (Naver Dict, etc.)",
           toolSelf: "None (Translated by myself)",
-          lblConf1: "Confidence Level (1~5):",
-          conf5: "5 - Very Confident",
-          conf4: "4 - Confident",
-          conf3: "3 - Neutral",
-          conf2: "2 - Unsure",
-          conf1: "1 - Guessing / Don't know",
           lblTrans2: "Final Refined Translation (with Malbit Finder):",
           lblRecognized:
             "Did Malbit Finder help you recognize a new idiom/phrase?",
@@ -546,6 +539,11 @@
           recogHard:
             "Still difficult to understand the context even with the dictionary",
           lblConf2: "Final Confidence Level (1~5):",
+          conf5: "5 - Very Confident",
+          conf4: "4 - Confident",
+          conf3: "3 - Neutral",
+          conf2: "2 - Unsure",
+          conf1: "1 - Guessing / Don't know",
         },
         "zh-CN": {
           headerTitle: "韩语惯用语翻译与理解实证实验",
@@ -591,12 +589,6 @@
           toolAI: "AI 工具 (ChatGPT / Gemini / Claude)",
           toolDict: "传统词典 (Naver 词典等)",
           toolSelf: "未使用工具 (自己独立翻译)",
-          lblConf1: "翻译确信度 (1~5分)：",
-          conf5: "5 - 非常确信",
-          conf4: "4 - 比较确信",
-          conf3: "3 - 一般",
-          conf2: "2 - 不太确定",
-          conf1: "1 - 完全不知道/猜测",
           lblTrans2: "使用 Malbit Finder 后的最终修改翻译：",
           lblRecognized: "通过 Malbit Finder 识别出新的惯用语/熟语了吗？",
           recogYes: "是的！新学到了以前不知道的惯用语/俗语含义",
@@ -604,6 +596,11 @@
           recogLiteral: "确认了这里是字面意思（非惯用语）",
           recogHard: "即使看了词典，仍然难以理解上下文",
           lblConf2: "最终确信度 (1~5分)：",
+          conf5: "5 - 非常确信",
+          conf4: "4 - 比较确信",
+          conf3: "3 - 一般",
+          conf2: "2 - 不太确定",
+          conf1: "1 - 完全不知道/猜测",
         },
         vi: {
           headerTitle: "Thử nghiệm dịch và hiểu thành ngữ tiếng Hàn",
@@ -654,12 +651,6 @@
           toolAI: "AI (ChatGPT / Gemini / Claude)",
           toolDict: "Từ điển thông thường (Naver Dict, v.v.)",
           toolSelf: "Không dùng công cụ (Tự dịch)",
-          lblConf1: "Mức độ tự tin (1~5):",
-          conf5: "5 - Rất tự tin",
-          conf4: "4 - Khá tự tin",
-          conf3: "3 - Bình thường",
-          conf2: "2 - Không chắc chắn",
-          conf1: "1 - Hoàn toàn đoán mò",
           lblTrans2: "Bản dịch cuối cùng (Sau khi dùng Malbit Finder):",
           lblRecognized:
             "Malbit Finder có giúp bạn nhận ra thành ngữ/cụm từ mới không?",
@@ -669,6 +660,11 @@
             "Xác nhận câu này dùng theo nghĩa đen (không phải thành ngữ)",
           recogHard: "Dù đã tra từ điển nhưng vẫn khó hiểu ngữ cảnh",
           lblConf2: "Mức độ tự tin cuối cùng (1~5):",
+          conf5: "5 - Rất tự tin",
+          conf4: "4 - Khá tự tin",
+          conf3: "3 - Bình thường",
+          conf2: "2 - Không chắc chắn",
+          conf1: "1 - Hoàn toàn đoán mò",
         },
         uz: {
           headerTitle:
@@ -721,12 +717,6 @@
           toolAI: "AI (ChatGPT / Gemini / Claude)",
           toolDict: "Lug'at (Naver Dict va b.)",
           toolSelf: "Vositasiz (O'zim tarjima qildim)",
-          lblConf1: "Ishonch darajasi (1~5):",
-          conf5: "5 - Juda ishonaman",
-          conf4: "4 - Ishonaman",
-          conf3: "3 - O'rtacha",
-          conf2: "2 - Ishonchim komil emas",
-          conf1: "1 - Taxmin qildim / Bilmayman",
           lblTrans2: "Yakuniy tuzatilgan tarjima (Malbit Finder bilan):",
           lblRecognized:
             "Malbit Finder yangi iborani aniqlashga yordam berdimi?",
@@ -736,6 +726,11 @@
             "Ibora emas, o'z (to'g'ri) ma'nosida ekanligini tasdiqladim",
           recogHard: "Lug'atga qarasam ham kontekstni tushunish qiyin",
           lblConf2: "Yakuniy ishonch darajasi (1~5):",
+          conf5: "5 - Juda ishonaman",
+          conf4: "4 - Ishonaman",
+          conf3: "3 - O'rtacha",
+          conf2: "2 - Ishonchim komil emas",
+          conf1: "1 - Taxmin qildim / Bilmayman",
         },
       };
 
@@ -1178,9 +1173,6 @@
           .querySelectorAll(".lbl-dyn-tool")
           .forEach((el) => (el.innerText = t.lblTool));
         document
-          .querySelectorAll(".lbl-dyn-conf1")
-          .forEach((el) => (el.innerText = t.lblConf1));
-        document
           .querySelectorAll(".lbl-dyn-trans2")
           .forEach((el) => (el.innerText = t.lblTrans2));
         document
@@ -1190,23 +1182,24 @@
           .querySelectorAll(".lbl-dyn-conf2")
           .forEach((el) => (el.innerText = t.lblConf2));
 
-        // 드롭다운 내부 옵션 번역 적용
+        // 1차 실험 라디오 버튼 레이블 텍스트 갱신
         document
-          .querySelectorAll(".opt-tool-google")
+          .querySelectorAll(".lbl-radio-tool-google")
           .forEach((el) => (el.innerText = t.toolGoogle));
         document
-          .querySelectorAll(".opt-tool-papago")
+          .querySelectorAll(".lbl-radio-tool-papago")
           .forEach((el) => (el.innerText = t.toolPapago));
         document
-          .querySelectorAll(".opt-tool-ai")
+          .querySelectorAll(".lbl-radio-tool-ai")
           .forEach((el) => (el.innerText = t.toolAI));
         document
-          .querySelectorAll(".opt-tool-dict")
+          .querySelectorAll(".lbl-radio-tool-dict")
           .forEach((el) => (el.innerText = t.toolDict));
         document
-          .querySelectorAll(".opt-tool-self")
+          .querySelectorAll(".lbl-radio-tool-self")
           .forEach((el) => (el.innerText = t.toolSelf));
 
+        // 2차 실험 드롭다운 옵션 번역 갱신
         document
           .querySelectorAll(".opt-conf-5")
           .forEach((el) => (el.innerText = t.conf5));
@@ -1262,26 +1255,29 @@
                         <label class="lbl-dyn-trans1 block text-xs font-bold text-slate-700 mb-1">${t.lblTrans1}</label>
                         <textarea id="exp1-trans-${item.id}" oninput="clearMissingHighlight('exp1-card-${item.id}')" rows="2" class="notranslate w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" translate="no"></textarea>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                        <div>
-                            <label class="lbl-dyn-tool block text-xs font-bold text-slate-700 mb-1">${t.lblTool}</label>
-                            <select id="exp1-tool-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500">
-                                <option value="Google Translate" class="opt-tool-google">${t.toolGoogle}</option>
-                                <option value="Papago" class="opt-tool-papago">${t.toolPapago}</option>
-                                <option value="ChatGPT / Gemini" class="opt-tool-ai">${t.toolAI}</option>
-                                <option value="Bilingual Dictionary" class="opt-tool-dict">${t.toolDict}</option>
-                                <option value="None (Self)" class="opt-tool-self">${t.toolSelf}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="lbl-dyn-conf1 block text-xs font-bold text-slate-700 mb-1">${t.lblConf1}</label>
-                            <select id="exp1-conf-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500">
-                                <option value="5" class="opt-conf-5">${t.conf5}</option>
-                                <option value="4" class="opt-conf-4">${t.conf4}</option>
-                                <option value="3" selected class="opt-conf-3">${t.conf3}</option>
-                                <option value="2" class="opt-conf-2">${t.conf2}</option>
-                                <option value="1" class="opt-conf-1">${t.conf1}</option>
-                            </select>
+                    <div class="pt-1">
+                        <label class="lbl-dyn-tool block text-xs font-bold text-slate-700 mb-2">${t.lblTool}</label>
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs text-slate-700">
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="exp1-tool-${item.id}" value="Google Translate" checked class="text-blue-600 focus:ring-blue-500">
+                                <span class="lbl-radio-tool-google">${t.toolGoogle}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="exp1-tool-${item.id}" value="Papago" class="text-blue-600 focus:ring-blue-500">
+                                <span class="lbl-radio-tool-papago">${t.toolPapago}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="exp1-tool-${item.id}" value="ChatGPT / Gemini" class="text-blue-600 focus:ring-blue-500">
+                                <span class="lbl-radio-tool-ai">${t.toolAI}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="exp1-tool-${item.id}" value="Bilingual Dictionary" class="text-blue-600 focus:ring-blue-500">
+                                <span class="lbl-radio-tool-dict">${t.toolDict}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="exp1-tool-${item.id}" value="None (Self)" class="text-blue-600 focus:ring-blue-500">
+                                <span class="lbl-radio-tool-self">${t.toolSelf}</span>
+                            </label>
                         </div>
                     </div>
                 `;
@@ -1410,6 +1406,9 @@
           .classList.add("hidden");
         exp1Results = [];
         EXPERIMENT_SENTENCES.forEach((item) => {
+          const selectedRadio = document.querySelector(
+            `input[name="exp1-tool-${item.id}"]:checked`,
+          );
           exp1Results.push({
             qId: item.id,
             sentence: item.sentence,
@@ -1418,10 +1417,7 @@
             translation: document
               .getElementById(`exp1-trans-${item.id}`)
               .value.trim(),
-            usedTool: document.getElementById(`exp1-tool-${item.id}`).value,
-            confidence: parseInt(
-              document.getElementById(`exp1-conf-${item.id}`).value,
-            ),
+            usedTool: selectedRadio ? selectedRadio.value : "Google Translate",
           });
         });
 
@@ -1486,7 +1482,6 @@
           "제시문장",
           "1차번역(기존도구)",
           "1차사용도구",
-          "1차확신도",
           "2차번역(말빛파인더)",
           "관용어인식여부",
           "2차확신도",
@@ -1516,7 +1511,6 @@
             item.sentence,
             r1.translation || "",
             r1.usedTool || "",
-            r1.confidence || "",
             trans2,
             recog2,
             conf2,
