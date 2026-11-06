@@ -473,12 +473,6 @@
           recogKnew: "원래 알고 있던 표현이지만 뜻을 재확인함",
           recogLiteral: "관용구가 아니라 글자 그대로의 의미임을 확인함",
           recogHard: "사전을 봐도 여전히 문맥 이해가 어려움",
-          lblConf2: "2차 번역 확신도 (1~5):",
-          conf5: "5 - 매우 확신함 (Very Confident)",
-          conf4: "4 - 어느 정도 확신함 (Confident)",
-          conf3: "3 - 보통 (Neutral)",
-          conf2: "2 - 불확실함 (Unsure)",
-          conf1: "1 - 전혀 모름/추측 (Guessing)",
         },
         en: {
           headerTitle: "Korean Idiomatic Expressions Translation Study",
@@ -538,12 +532,6 @@
           recogLiteral: "Confirmed it is used literally (not an idiom)",
           recogHard:
             "Still difficult to understand the context even with the dictionary",
-          lblConf2: "Final Confidence Level (1~5):",
-          conf5: "5 - Very Confident",
-          conf4: "4 - Confident",
-          conf3: "3 - Neutral",
-          conf2: "2 - Unsure",
-          conf1: "1 - Guessing / Don't know",
         },
         "zh-CN": {
           headerTitle: "韩语惯用语翻译与理解实证实验",
@@ -595,12 +583,6 @@
           recogKnew: "原本就知道该表达，再次确认了含义",
           recogLiteral: "确认了这里是字面意思（非惯用语）",
           recogHard: "即使看了词典，仍然难以理解上下文",
-          lblConf2: "最终确信度 (1~5分)：",
-          conf5: "5 - 非常确信",
-          conf4: "4 - 比较确信",
-          conf3: "3 - 一般",
-          conf2: "2 - 不太确定",
-          conf1: "1 - 完全不知道/猜测",
         },
         vi: {
           headerTitle: "Thử nghiệm dịch và hiểu thành ngữ tiếng Hàn",
@@ -659,12 +641,6 @@
           recogLiteral:
             "Xác nhận câu này dùng theo nghĩa đen (không phải thành ngữ)",
           recogHard: "Dù đã tra từ điển nhưng vẫn khó hiểu ngữ cảnh",
-          lblConf2: "Mức độ tự tin cuối cùng (1~5):",
-          conf5: "5 - Rất tự tin",
-          conf4: "4 - Khá tự tin",
-          conf3: "3 - Bình thường",
-          conf2: "2 - Không chắc chắn",
-          conf1: "1 - Hoàn toàn đoán mò",
         },
         uz: {
           headerTitle:
@@ -725,12 +701,6 @@
           recogLiteral:
             "Ibora emas, o'z (to'g'ri) ma'nosida ekanligini tasdiqladim",
           recogHard: "Lug'atga qarasam ham kontekstni tushunish qiyin",
-          lblConf2: "Yakuniy ishonch darajasi (1~5):",
-          conf5: "5 - Juda ishonaman",
-          conf4: "4 - Ishonaman",
-          conf3: "3 - O'rtacha",
-          conf2: "2 - Ishonchim komil emas",
-          conf1: "1 - Taxmin qildim / Bilmayman",
         },
       };
 
@@ -1156,7 +1126,7 @@
           t.btnDownloadCsv;
         document.getElementById("btn-restart").innerText = t.btnRestart;
 
-        // 문항 카드 내부 라벨 및 선택지 일괄 번역 업데이트
+        // 문항 카드 공통 레이블 업데이트
         document
           .querySelectorAll(".lbl-dyn-sentence")
           .forEach((el) => (el.innerText = t.lblSentence));
@@ -1178,11 +1148,8 @@
         document
           .querySelectorAll(".lbl-dyn-recog")
           .forEach((el) => (el.innerText = t.lblRecognized));
-        document
-          .querySelectorAll(".lbl-dyn-conf2")
-          .forEach((el) => (el.innerText = t.lblConf2));
 
-        // 1차 실험 라디오 버튼 레이블 텍스트 갱신
+        // 1차 실험 도구 라디오 레이블
         document
           .querySelectorAll(".lbl-radio-tool-google")
           .forEach((el) => (el.innerText = t.toolGoogle));
@@ -1199,34 +1166,18 @@
           .querySelectorAll(".lbl-radio-tool-self")
           .forEach((el) => (el.innerText = t.toolSelf));
 
-        // 2차 실험 드롭다운 옵션 번역 갱신
+        // 2차 실험 관용어 인식 라디오 레이블
         document
-          .querySelectorAll(".opt-conf-5")
-          .forEach((el) => (el.innerText = t.conf5));
-        document
-          .querySelectorAll(".opt-conf-4")
-          .forEach((el) => (el.innerText = t.conf4));
-        document
-          .querySelectorAll(".opt-conf-3")
-          .forEach((el) => (el.innerText = t.conf3));
-        document
-          .querySelectorAll(".opt-conf-2")
-          .forEach((el) => (el.innerText = t.conf2));
-        document
-          .querySelectorAll(".opt-conf-1")
-          .forEach((el) => (el.innerText = t.conf1));
-
-        document
-          .querySelectorAll(".opt-recog-yes")
+          .querySelectorAll(".lbl-radio-recog-yes")
           .forEach((el) => (el.innerText = t.recogYes));
         document
-          .querySelectorAll(".opt-recog-knew")
+          .querySelectorAll(".lbl-radio-recog-knew")
           .forEach((el) => (el.innerText = t.recogKnew));
         document
-          .querySelectorAll(".opt-recog-literal")
+          .querySelectorAll(".lbl-radio-recog-literal")
           .forEach((el) => (el.innerText = t.recogLiteral));
         document
-          .querySelectorAll(".opt-recog-hard")
+          .querySelectorAll(".lbl-radio-recog-hard")
           .forEach((el) => (el.innerText = t.recogHard));
       }
 
@@ -1315,25 +1266,25 @@
                         <label class="lbl-dyn-trans2 block text-xs font-bold text-emerald-900 mb-1">${t.lblTrans2}</label>
                         <textarea id="exp2-trans-${item.id}" oninput="clearMissingHighlight('exp2-card-${item.id}')" rows="2" class="notranslate w-full border border-emerald-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" translate="no">${prev ? prev.translation : ""}</textarea>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                        <div>
-                            <label class="lbl-dyn-recog block text-xs font-bold text-slate-700 mb-1">${t.lblRecognized}</label>
-                            <select id="exp2-recog-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500">
-                                <option value="Yes_New_Idiom" class="opt-recog-yes">${t.recogYes}</option>
-                                <option value="Already_Knew" class="opt-recog-knew">${t.recogKnew}</option>
-                                <option value="Literal_Confirmed" class="opt-recog-literal">${t.recogLiteral}</option>
-                                <option value="Still_Confused" class="opt-recog-hard">${t.recogHard}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="lbl-dyn-conf2 block text-xs font-bold text-slate-700 mb-1">${t.lblConf2}</label>
-                            <select id="exp2-conf-${item.id}" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-emerald-500">
-                                <option value="5" selected class="opt-conf-5">${t.conf5}</option>
-                                <option value="4" class="opt-conf-4">${t.conf4}</option>
-                                <option value="3" class="opt-conf-3">${t.conf3}</option>
-                                <option value="2" class="opt-conf-2">${t.conf2}</option>
-                                <option value="1" class="opt-conf-1">${t.conf1}</option>
-                            </select>
+                    <div class="pt-1">
+                        <label class="lbl-dyn-recog block text-xs font-bold text-slate-700 mb-2">${t.lblRecognized}</label>
+                        <div class="flex flex-col sm:flex-row sm:flex-wrap gap-2.5 sm:gap-4 text-xs text-slate-700">
+                            <label class="inline-flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 transition">
+                                <input type="radio" name="exp2-recog-${item.id}" value="Yes_New_Idiom" checked class="text-emerald-600 focus:ring-emerald-500">
+                                <span class="lbl-radio-recog-yes">${t.recogYes}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 transition">
+                                <input type="radio" name="exp2-recog-${item.id}" value="Already_Knew" class="text-emerald-600 focus:ring-emerald-500">
+                                <span class="lbl-radio-recog-knew">${t.recogKnew}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 transition">
+                                <input type="radio" name="exp2-recog-${item.id}" value="Literal_Confirmed" class="text-emerald-600 focus:ring-emerald-500">
+                                <span class="lbl-radio-recog-literal">${t.recogLiteral}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-3 py-2 transition">
+                                <input type="radio" name="exp2-recog-${item.id}" value="Still_Confused" class="text-emerald-600 focus:ring-emerald-500">
+                                <span class="lbl-radio-recog-hard">${t.recogHard}</span>
+                            </label>
                         </div>
                     </div>
                 `;
@@ -1484,7 +1435,6 @@
           "1차사용도구",
           "2차번역(말빛파인더)",
           "관용어인식여부",
-          "2차확신도",
           "번역수정여부",
         ];
 
@@ -1495,8 +1445,12 @@
           const trans2 = document
             .getElementById(`exp2-trans-${item.id}`)
             .value.trim();
-          const recog2 = document.getElementById(`exp2-recog-${item.id}`).value;
-          const conf2 = document.getElementById(`exp2-conf-${item.id}`).value;
+          const selectedRecog = document.querySelector(
+            `input[name="exp2-recog-${item.id}"]:checked`,
+          );
+          const recog2 = selectedRecog
+            ? selectedRecog.value
+            : "Yes_New_Idiom";
           const isModified =
             r1.translation !== trans2 ? "Y (수정됨)" : "N (동일)";
 
@@ -1513,7 +1467,6 @@
             r1.usedTool || "",
             trans2,
             recog2,
-            conf2,
             isModified,
           ];
           rows.push(row.map(escapeCsvCell).join(","));
